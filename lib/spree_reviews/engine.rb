@@ -1,3 +1,5 @@
+require_relative 'configuration'
+
 module SpreeReviews
   class Engine < Rails::Engine
     require 'spree/core'
@@ -10,7 +12,7 @@ module SpreeReviews
     end
 
     initializer 'spree_reviews.environment', before: :load_config_initializers do |_app|
-      Spree::Reviews::Config = Spree::ReviewSetting.new
+      SpreeReviews::Config = SpreeReviews::Configuration.new
     end
 
     def self.activate
