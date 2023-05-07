@@ -33,11 +33,14 @@ fr:
     for: pour
     from: de la part de
     info_approve_review: Commentaire approuvé
-    leave_us_a_review_for: "Veuillez laisser un commentaire et une note pour le produit : %{name}"
+    leave_us_a_review_for: "Si vous avez utilisé ce produit, partagez vos impressions avec d'autres clients. Veuillez laisser un commentaire et une note pour le produit : %{name}"
     no_reviews_available: "Il n'y pas encore de commentaire pour ce produit."
+    already_opinions: "Déjà %{counter} avis sur ce produit."
+    rating_question: Quelle note donneriez-vous à ce produit?
+    share_your_thoughts: Partagez votre expérience
     out_of_5: "sur 5"
     rating: note
-    reviews: Commentaires
+    reviews: Commentaires client
     admin:
       tab:
         review_management: Commentaires
@@ -55,6 +58,12 @@ fr:
     star:
       one: "1"
       other: "%{count}"
+    rating_note:
+      excellent: excellent
+      very_good: trés bien
+      average: moyen
+      poor: mauvais
+      terrible: épouvantable
     stars: Étoiles
     submit_your_review: Envoyer votre commentaire
     submitted_on: Envoyé le

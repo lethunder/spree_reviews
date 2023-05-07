@@ -5,13 +5,17 @@ module Spree
     before_action :init_pagination, only: [:index]
 
     def index
-      @approved_reviews = Spree::Review.default_approval_filter.where(product: @product).page(@pagination_page).per(@pagination_per_page)
+      @approved_reviews = Spree::Review.default_approval_filter.where(product: @product).page(@pagination_page)
       @title = "#{@product.name} #{Spree.t(:reviews)}"
+      if request.xhr?
+        render partial: "index", locals: {product: @product, reviews: @approved_reviews}, layout: false, status: 200
+      end
     end
 
     def new
       @review = Spree::Review.new(product: @product)
       authorize! :create, @review
+      render template: "spree/reviews/new", layout: false, status: :ok
     end
 
     def create
@@ -39,7 +43,7 @@ module Spree
     end
 
     def permitted_review_attributes
-      [:rating, :title, :review, :name, :show_identifier]
+      [:rating, :title, :review, :name, :show_identifier, images: []]
     end
 
     def review_params
@@ -48,7 +52,6 @@ module Spree
 
     def init_pagination
       @pagination_page = params[:page].present? ? params[:page].to_i : 1
-      @pagination_per_page = params[:per_page].present? ? params[:per_page].to_i : SpreeReviews::Config[:paginate_size]
     end
   end
 end

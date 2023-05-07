@@ -1,4 +1,6 @@
 class Spree::Review < ActiveRecord::Base
+  paginates_per 3
+  RATING = {:"5" => I18n.t("spree.rating_note.excellent"), :"4" => I18n.t("spree.rating_note.very_good"), :"3" => I18n.t("spree.rating_note.average"), :"2" => I18n.t("spree.rating_note.poor"), :"1" => I18n.t("spree.rating_note.terrible")}
   belongs_to :product, touch: true
   belongs_to :user, class_name: Spree.user_class.to_s
   has_many   :feedback_reviews
@@ -12,7 +14,7 @@ class Spree::Review < ActiveRecord::Base
     greater_than_or_equal_to: 1,
     less_than_or_equal_to: 5,
     message: :you_must_enter_value_for_rating
-  }
+  }, presence: true
 
   default_scope { order('spree_reviews.created_at DESC') }
 
@@ -23,6 +25,10 @@ class Spree::Review < ActiveRecord::Base
   scope :approved, -> { where(approved: true) }
   scope :not_approved, -> { where(approved: false) }
   scope :default_approval_filter, -> { SpreeReviews::Config[:include_unapproved_reviews] ? all : approved }
+
+  has_many_attached :images do |attachable|
+    attachable.variant :thumb, resize_to_fit: [nil, 200]
+  end
 
   def feedback_stars
     return 0 if feedback_reviews.size <= 0

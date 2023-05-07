@@ -37,11 +37,14 @@ en:
     for: for
     from: from
     info_approve_review: Review approved
-    leave_us_a_review_for: "Please leave us a review and a rating for our '%{name}'"
+    leave_us_a_review_for: "If you’ve used this product, share your thoughts with other customers. Please leave us a review and a rating for our '%{name}'"
     no_reviews_available: "No reviews have been written for this product."
+    already_opinions: "Already %{counter} opinions on this product."
+    rating_question: How would you rate this product?
+    share_your_thoughts: Share your thoughts
     out_of_5: "out of 5"
     rating: rating
-    reviews: Reviews
+    reviews: Customer Reviews
     admin:
       tab:
         review_management: Reviews
@@ -60,6 +63,12 @@ en:
     star:
       one: "1"
       other: "%{count}"
+    rating_note:
+      excellent: Excellent
+      very_good: Very Good
+      average: Average
+      poor: Poor
+      terrible: Terrible
     stars: Stars
     submit_your_review: Submit your review
     submitted_on: Submitted on

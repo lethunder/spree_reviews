@@ -1,0 +1,11 @@
+<div class="-my-12 divide-y divide-gray-200">
+  <% reviews.each do |review| %>
+    <%= render 'spree/shared/review', review: review %>
+  <% end %>
+
+  <div class="mt-10">
+    <% if reviews.respond_to?(:total_pages) %>
+      <%= paginate reviews, theme: 'tailwind-remote', remote: true, params: { :controller => "spree/reviews", :action => "index", :product_id => product.id } %>
+    <% end %>
+  </div>
+</div>

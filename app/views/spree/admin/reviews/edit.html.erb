@@ -14,6 +14,21 @@
       <blockquote>
         <%= simple_format(@review.review) %>
       </blockquote>
+
+
+      <% if @review.images.attached? %>
+        Images
+        <div class="row">
+          <% @review.images.each do |image| %>
+          <div class="col">
+            <a href="<%= image.url %>" target="_blank">
+              <%= image_tag image.variant(:thumb).processed.url, class: "pointer-events-none object-cover group-hover:opacity-75", style: "width: inherit"  %>
+            </a>
+          </div>
+          <% end %>
+        </div>
+      <% end %>
+
     </div>
   </div>
   <%= render 'spree/admin/shared/edit_resource_links' %>
