@@ -41,6 +41,7 @@ fr:
     out_of_5: "sur 5"
     rating: note
     reviews: Commentaires client
+    verified_purchase: Achat vérifié
     admin:
       tab:
         review_management: Commentaires

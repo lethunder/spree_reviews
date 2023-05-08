@@ -21,14 +21,6 @@
       <% if (!SpreeReviews::Config[:require_login] || spree_current_user) %>
         <%= link_to Spree.t(:write_your_own_review), new_product_review_path(@product), class: 'mt-6 inline-flex w-full items-center justify-center rounded-md border border-gray-300 bg-white px-8 py-2 text-sm font-medium text-gray-900 hover:bg-gray-50 lg:w-full  display-in-offcanvas-js', "data-hs-offcanvas" => "#hs-offcanvas-right", data: { turbo: "false" }, remote: true, rel: 'nofollow' %>
       <% end %>
-      <% unless SpreeReviews::Config[:include_unapproved_reviews] == false and @product.reviews.approved.count == 0 %>
-        <div class="mt-6 text-center text-sm text-gray-500">
-          <p>
-            <%= Spree.t(:or) if (!SpreeReviews::Config[:require_login] || spree_current_user) %>
-            <%= link_to Spree.t(:read_all_reviews), product_reviews_path(@product), class: 'font-medium text-indigo-600 hover:text-indigo-500', rel: 'nofollow' %>
-          </p>
-        </div>
-      <% end %>
     </div>
   </div>
 

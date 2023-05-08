@@ -58,6 +58,7 @@
         <th><%= sort_link @search, :product, Spree.t(:product) %></th>
         <th><%= sort_link @search, :rating, Spree::Review.human_attribute_name(:rating) %></th>
         <th><%= Spree.t(:feedback) %></th>
+        <th><%= Spree.t(:verified_purchase) %></th>
         <th><%= sort_link @search, :user, Spree::Review.human_attribute_name(:user) %></th>
         <th><%= sort_link @search, :ip_address, Spree::Review.human_attribute_name(:ip_address) %></th>
         <th><%= sort_link @search, :created_at, Spree::Review.human_attribute_name(:created_at) %></th>
@@ -70,6 +71,15 @@
           <td><%= link_to_if review.product, review.product.name, product_path(review.product) %></td>
           <td><%= txt_stars(review.rating) %></td>
           <td><%= link_to "(#{review.feedback_stars}/#{review.feedback_reviews.size})", admin_review_feedback_reviews_path(review) %></td>
+          <td>
+            <% if review.verified_purchase %>
+              <small class="badge badge-pill badge-active"><%= Spree.t(:say_yes) %></small>
+            <% else %>
+            <span class="badge badge-pill badge-secondary">
+              <%= Spree.t(:say_no) %>
+            </span>
+            <% end %>
+          </td>
           <td><%= review.user_id ? link_to(review.user.try(:email), admin_user_path(review.user)) : Spree.t(:anonymous) %></td>
           <td><%= link_to_if review.ip_address, review.ip_address, "http://whois.domaintools.com/#{review.ip_address}", target: :blank %></td>
           <td><%= l review.created_at, format: :short %></td>

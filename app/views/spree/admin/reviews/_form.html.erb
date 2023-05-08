@@ -15,6 +15,11 @@
   <%= f.text_area :review, wrap: 'virtual', rows: 10, cols: 60, class: 'form-control' %>
 </div>
 
+<%= f.field_container :verified_purchase, class: ['form-group'] do %>
+  <%= f.check_box :verified_purchase %>
+  <%= f.label :verified_purchase %>
+<% end %>
+
 <% if SpreeReviews::Config[:track_locale] %>
   <div class="form-group">
     <%= f.label :locale %>

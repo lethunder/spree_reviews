@@ -8,6 +8,7 @@ class CreateReviews < SpreeExtension::Migration[4.2]
       t.text    :title
       t.text    :review
       t.boolean :approved, default: false
+      t.boolean :verified_purchase, default: false, index: true
       t.timestamps null: false
     end
   end

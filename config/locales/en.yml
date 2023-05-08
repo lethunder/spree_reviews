@@ -45,6 +45,7 @@ en:
     out_of_5: "out of 5"
     rating: rating
     reviews: Customer Reviews
+    verified_purchase: Verified purchase
     admin:
       tab:
         review_management: Reviews
