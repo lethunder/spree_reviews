@@ -13,15 +13,14 @@
         <%= render 'spree/shared/review_summary', product: @product %>
       <% end %>
     </div>
+    <% if (!SpreeReviews::Config[:require_login] || spree_current_user) %>
+      <div class="mt-10">
+        <h3 class="text-lg font-medium text-gray-900"><%= Spree.t(:share_your_thoughts) %></h3>
+        <p class="mt-1 text-sm text-gray-600"><%= Spree.t(:leave_us_a_review_for, name: @product.name) %></p>
 
-    <div class="mt-10">
-      <h3 class="text-lg font-medium text-gray-900"><%= Spree.t(:share_your_thoughts) %></h3>
-      <p class="mt-1 text-sm text-gray-600"><%= Spree.t(:leave_us_a_review_for, name: @product.name) %></p>
-
-      <% if (!SpreeReviews::Config[:require_login] || spree_current_user) %>
         <%= link_to Spree.t(:write_your_own_review), new_product_review_path(@product), class: 'mt-6 inline-flex w-full items-center justify-center rounded-md border border-gray-300 bg-white px-8 py-2 text-sm font-medium text-gray-900 hover:bg-gray-50 lg:w-full  display-in-offcanvas-js', "data-hs-offcanvas" => "#hs-offcanvas-right", data: { turbo: "false" }, remote: true, rel: 'nofollow' %>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
   </div>
 
   <div class="mt-16 lg:col-span-7 lg:col-start-6 lg:mt-0">
