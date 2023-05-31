@@ -4,6 +4,10 @@ class Spree::Review < ActiveRecord::Base
   belongs_to :product, touch: true
   belongs_to :user, class_name: Spree.user_class.to_s
   has_many   :feedback_reviews
+  has_many_attached :images do |attachable|
+    attachable.variant :thumb, resize_to_fit: [nil, 200], saver: { quality: 75 }, convert: :webp
+    attachable.variant :medium, resize_to_limit: [200, 200], saver: { quality: 75 }, convert: :webp
+  end
 
   after_save :recalculate_product_rating, if: :approved?
   after_destroy :recalculate_product_rating
@@ -16,6 +20,9 @@ class Spree::Review < ActiveRecord::Base
     message: :you_must_enter_value_for_rating
   }, presence: true
 
+  validates :images, blob: { content_type: :image, size_range: 0..(3.megabytes) }
+
+
   default_scope { order('spree_reviews.created_at DESC') }
 
   scope :localized, ->(lc) { where('spree_reviews.locale = ?', lc) }
@@ -26,9 +33,6 @@ class Spree::Review < ActiveRecord::Base
   scope :not_approved, -> { where(approved: false) }
   scope :default_approval_filter, -> { SpreeReviews::Config[:include_unapproved_reviews] ? all : approved }
 
-  has_many_attached :images do |attachable|
-    attachable.variant :thumb, resize_to_fit: [nil, 200]
-  end
 
   def feedback_stars
     return 0 if feedback_reviews.size <= 0

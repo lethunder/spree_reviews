@@ -32,7 +32,7 @@ module Spree
         flash[:notice] = Spree.t(:review_successfully_submitted)
         redirect_to spree.product_path(@product)
       else
-        render :new
+        render :new, layout: false , status: 422
       end
     end
 

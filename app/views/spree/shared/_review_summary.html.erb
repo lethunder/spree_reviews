@@ -10,6 +10,8 @@
 
   <% SpreeReviews::Config.stars.downto(1) do |star| %>
     <% star_reviews_counter = reviews.select { |review| review.rating == star }.count %>
+    <% percentage = (star_reviews_counter*100)/ reviews_count%>
+    <% calc_value = ((percentage*1624)/100) %>
     <div class="flex items-center text-sm">
       <dt class="flex flex-1 items-center">
         <p class="w-3 font-medium text-gray-900"><%= star %><span class="sr-only">star reviews</span></p>
@@ -20,12 +22,12 @@
 
           <div class="relative ml-3 flex-1">
             <div class="h-3 rounded-full border border-gray-200 bg-gray-100"></div>
-            <div style="width: calc(1019 / 1624 * 100%)" class="absolute inset-y-0 rounded-full border border-yellow-400 bg-yellow-400"></div>
+            <div style="width: calc(<%= calc_value %> / 1624 * 100%)" class="absolute inset-y-0 rounded-full border border-yellow-400 bg-yellow-400"></div>
           </div>
         </div>
       </dt>
       <dd class="ml-3 w-10 text-right text-sm tabular-nums text-gray-900">
-        <%= (star_reviews_counter*100)/ reviews_count%>%
+        <%= percentage %>%
       </dd>
     </div>
   <% end %>
